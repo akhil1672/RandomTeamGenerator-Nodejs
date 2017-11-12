@@ -1,0 +1,19 @@
+{
+  "name": "randomteamcreator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "prompt": "^1.0.0",
+    "random-number": "0.0.9"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.1"
+  }
+}
