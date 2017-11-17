@@ -1,20 +1,11 @@
 const fs = require('fs')
 const prompt=require('prompt')
 prompt.start()
-var json = require('C:\\Users\\Akhil\\Desktop\\Aspirants.json')
-function shuffle(array) {
-    var i = array.length,j = 0,temp;
-    while (i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-    return array;
-}
-json=shuffle(json)
-var teamSize = prompt.get(['TeamSize'],function(err,result)
+var teamSize = prompt.get(['FilePath','TeamSize'],function(err,result)
 {
+    var json=fs.readFile(result.FilePath)
+    json=JSON.parse(json)
+    json=shuffle(json)
     var size=result.TeamSize
     if(size<1)
     {
@@ -44,7 +35,7 @@ var teamSize = prompt.get(['TeamSize'],function(err,result)
             var input = result.Enter
             if(input=="Y"||input=='y')
             {   
-              createteams(jsonlength,size)
+              createteams(json,jsonlength,size)
             }
             else if(input=="N"||input=='n')
                 {
@@ -58,14 +49,14 @@ var teamSize = prompt.get(['TeamSize'],function(err,result)
     else
     {
         console.log("Equal teams")
-        createteams(jsonlength,size)
+        createteams(json,jsonlength,size)
     }
 }) 
-function createteams(jsonlength,size) {
+function createteams(json,jsonlength,size) {
     var j = 1, k = 0;
     console.log("CREATING TEAMS!");
     console.log("Team " + j);
-    fs.writeFileSync('C:\\Users\\Akhil\\Desktop\\teams.txt', 'Team ' + j +'\r\n',(err)=>{
+    fs.writeFileSync('teams.txt', 'Team ' + j +'\r\n',(err)=>{
         if(err)
             throw err
     })
@@ -73,16 +64,26 @@ function createteams(jsonlength,size) {
         if (k >= size) {
             j++
             console.log("Team " + j)
-            fs.appendFileSync('C:\\Users\\Akhil\\Desktop\\teams.txt', "\r\nTeam " + j +'\r\n', (err) => {
+            fs.appendFileSync('teams.txt', "\r\nTeam " + j +'\r\n', (err) => {
                 if (err)
                     throw err
             })
             k = 0
         }
         console.log(json[i].name)
-        fs.appendFileSync('C:\\Users\\Akhil\\Desktop\\teams.txt', json[i].name+'\r\n' , (err) => {
+        fs.appendFileSync('teams.txt', json[i].name+'\r\n' , (err) => {
             if (err)
                 throw err
         })
     }
+}
+function shuffle(array) {
+    var i = array.length, j = 0, temp;
+    while (i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
 }
