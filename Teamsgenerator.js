@@ -7,47 +7,39 @@ var teamSize = prompt.get(['FilePath','TeamSize'],function(err,result)
     json=JSON.parse(json)
     json=shuffle(json)
     var size=result.TeamSize
-    if(size<1)
-    {
+    if(size<1){
         console.log("Size cannot be 0 or negative or "+err)
         process.exit(1);
     }
     var jsonlength= json.length
     console.log("No of students:"+jsonlength)
-    if(size>jsonlength)
-    {
+    if(size>jsonlength){
         console.log("Size cannot be greater than no of students" + err)
         process.exit(1);
     }
     var noofteams = Math.ceil(jsonlength/size)
-    if(isNaN(noofteams))
-    {
+    if(isNaN(noofteams)){
         console.log("Invalid entry!")
         process.exit(1)
     }
     console.log("No of teams:"+noofteams)
     var extra = jsonlength%size
-    if(extra!=0)
-    {
+    if(extra!=0){
         console.log("Unequal teams! Continue(Y/N):")
         prompt.get(['Enter'],function(err,result)
         {
             var input = result.Enter
-            if(input=="Y"||input=='y')
-            {   
+            if(input=="Y"||input=='y'){   
               createteams(json,jsonlength,size)
             }
-            else if(input=="N"||input=='n')
-                {
+            else if(input=="N"||input=='n') {
                     console.log("Have a good day!")
                 }
             else
                 console.log("Invalid input!")
-
         })
 }
-    else
-    {
+    else{
         console.log("Equal teams")
         createteams(json,jsonlength,size)
     }
