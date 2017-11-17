@@ -42,7 +42,7 @@ var teamSize = prompt.get(['FilePath','TeamSize'],function(err,result)
                     console.log("Have a good day!")
                 }
             else
-                console.log(err)
+                console.log("Invalid input!")
 
         })
 }
